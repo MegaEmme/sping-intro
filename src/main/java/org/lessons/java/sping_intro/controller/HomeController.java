@@ -49,11 +49,13 @@ public class HomeController {
     @GetMapping("/students")
     public String students(Model model) {
 
+        Student franscescoTotti = new Student("Francesco", "Totti", "er_pupone76@asroma.com", "pupone");
         Student studentessa = new Student("Ginetta", "Bianchi", "ginbianchi@gmail.com", "ginbianchina");
         Student studente = new Student("Gino", "Rossi", "ginorossi@gmail.com", "ginred");
         Student studentessaDue = new Student("Nina", "Prof", "ninapro@gmail.com", "ninayeah");
 
         ArrayList<Student> listaStudenti = new ArrayList<>();
+        listaStudenti.add(franscescoTotti);
         listaStudenti.add(studentessa);
         listaStudenti.add(studente);
         listaStudenti.add(studentessaDue);

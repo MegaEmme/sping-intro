@@ -36,14 +36,14 @@
             <!-- immaginiamo di avere una card -->
             <article class="card bg-warning container p-4 mb-3" th:object="${student}">
                 <!-- UTILIZZO INLINE EXPRESSIONS -->
-                <h3>Nome dello studente: [[*{firstName}]]</h3>
-                <h3 th:text="*{lastName}"/>
+                <h3>Nome: [[*{firstName}]]</h3>
+                <h3 th:text="|Cognome: *{lastName}|"/>
                 <!-- UTILIZZO COMBO STRININGHE-VARIALBILI (+) -->
                 <!-- <h3 th:text="*{email}"/> DIVENTA: -->
-                <h3 th:text="'email: ' + *{email}"/>
+                <!-- <h3 th:text="'email: ' + *{email}"/> -->
                 <!-- riga identica (SHORTCUT) -->
                 <h3 th:text="|email: *{email}|"/>
-                <h3 th:text="*{username}"/>
+                <h3 th:text="|username: *{username}|"/>
                 <!-- la riga seguente riporta a una rotta inesistente quindi la pagina da errore, ma è importante che l'errore sia del tipo "No static resource students/ginbianchina/altro." questo ci fa capire che il th:href aggancia il valore di suername e che nell'url compaia il valore username ottenuto dinamicamnete (URL che compare quandoo clicchi sul link ==> "http://localhost:8080/students/ginbianchina/altro")-->
                 <a th:href="@{/students/{studentUsername}/altro(studentUsername=*{username})}">link</a>
                 <!-- ATTRIBUTI CONDIZIONALI (IF - UNLESS) -->
@@ -69,7 +69,7 @@
                         <h3 th:text="|Unless: *{firstName}"! />
                     </div> 
                 -->
-                    <a href="#" class="btn btn-danger">Sono un bottone pericoloso</a>
+                    <a href="https://it.wikipedia.org/wiki/Francesco_Totti" class="btn btn-danger text-warning" target="_blank">Sono un bottone della Roma!</a>
             </article>
         </th:block>
     </section>

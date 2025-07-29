@@ -1,1 +1,1 @@
-alert("Ciao")
+console.log("E andiamo!");
