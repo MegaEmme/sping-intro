@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Students page</title>
+        <!-- link a bootstrap  -->
+         <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.3.7/css/bootstrap.min.css}">
+        <!-- link al css  -->
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+    </head>
+</head>
+<body>
+<header>
+    <!-- aggiunta immagini (public/img) -->
+    <img alt="logo" th:src="@{/img/logo.svg}">
+    <h2>Sono header</h2>
+</header>
+<main>
+    <h1>Sono main</h1>
+
+    <!-- UTILIZZO  th:text  -->
+    <!-- qua richiamo l'oggetto student per intero -->
+    <!-- <h3 th:text="${student}"/> -->
+    <!-- le prossime due righe compiono la stessa azione, la prima richiama il metodo, la seconda direttamente l'attributo, questo per evidenziare che con th:text="${...}" possiamo chiamare direttamente l'attributo -->
+     <!-- qua richiamo l'oggetto student attraverso i suoi attributi-->
+    <!-- <h3 th:text="${student.getFirstName()}"/> -->
+    <!-- <h3 th:text="${student.firstName}"/> -->
+    <!-- <h3 th:text="${student.lastName}"/> -->
+    <!-- <h3 th:text="${student.email}"/> -->
+    <!-- <h3 th:text="${student.username}"/> -->
+
+
+    <section class="students">
+        <!-- UTILIZZO th:each  -->
+        <th:block th:each="student : ${students}">
+            <!-- UTILIZZO th:object  -->
+            <!-- immaginiamo di avere una card -->
+            <article class="card bg-warning container p-4 mb-3" th:object="${student}">
+                <!-- UTILIZZO INLINE EXPRESSIONS -->
+                <h3>Nome dello studente: [[*{firstName}]]</h3>
+                <h3 th:text="*{lastName}"/>
+                <!-- UTILIZZO COMBO STRININGHE-VARIALBILI (+) -->
+                <!-- <h3 th:text="*{email}"/> DIVENTA: -->
+                <h3 th:text="'email: ' + *{email}"/>
+                <!-- riga identica (SHORTCUT) -->
+                <h3 th:text="|email: *{email}|"/>
+                <h3 th:text="*{username}"/>
+                <!-- la riga seguente riporta a una rotta inesistente quindi la pagina da errore, ma è importante che l'errore sia del tipo "No static resource students/ginbianchina/altro." questo ci fa capire che il th:href aggancia il valore di suername e che nell'url compaia il valore username ottenuto dinamicamnete (URL che compare quandoo clicchi sul link ==> "http://localhost:8080/students/ginbianchina/altro")-->
+                <a th:href="@{/students/{studentUsername}/altro(studentUsername=*{username})}">link</a>
+                <!-- ATTRIBUTI CONDIZIONALI (IF - UNLESS) -->
+                <!-- IF  -->
+                <!-- questa non stampa (Bianchi sono 6 lettere (<5)) -->
+                <div th:if="${student.lastName.length() < 5}">
+                    <h3 th:text="|If : *{lastName}|"/>
+                </div>
+                <!-- mentre questa si dovrebbe stamparese non fosse che se la mangia la condizione precedente, quindi commentiamo (Bianchi sono 6 lettere (6<5)) -->
+                <!--   
+                        <div th:if="${student.lastName.length() > 5}">
+                            <h3 th:text="*{lastName}"/>
+                        </div>
+                -->
+                <!-- UNLESS  -->
+                <!-- questo stampa (Ginetta !< 5) -->
+                <div th:unless="${student.firstName.length() < 5}">
+                    <h3 th:text="|Unless: *{firstName}"! />
+                </div>
+                <!-- questo non stampa (Ginetta > 5) -->
+                <!-- 
+                    <div th:unless="${student.firstName.length() < 5}">
+                        <h3 th:text="|Unless: *{firstName}"! />
+                    </div> 
+                -->
+                    <a href="#" class="btn btn-danger">Sono un bottone pericoloso</a>
+            </article>
+        </th:block>
+    </section>
+
+
+
+    
+</main>
+<footer>
+    <h2>Sono footer</h2>
+</footer>
+
+<!-- link al js  -->
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

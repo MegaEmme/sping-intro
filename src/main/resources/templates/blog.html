@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Blog</title>
+    </head>
+</head>
+<body>
+    <main>
+        <h1>Articolo: </h1>
+        <h1 th:text="${article}" />
+        <button>Successivo</button>
+        <button th:text="${articleNext}" />
+    </main>
+</body>
+</html>
