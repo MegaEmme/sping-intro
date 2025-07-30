@@ -23,7 +23,8 @@ public class HomeController {
     // sue caratteristiche base, fa riferimento a
     // un file contenuto nella cartella resources/teplate (home.html in questo caso)
     @GetMapping("/")
-    public String home() {
+    public String home(Model model) {
+        model.addAttribute("name", "Mike");
         return "home";
     }
     // nel browser "http://localhost:8080"
