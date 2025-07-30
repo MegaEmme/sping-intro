@@ -6,3 +6,11 @@ img{
     height: 80px; 
     width: 80px;
 }
+
+.navbar-toggler .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgb(220, 53, 69)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important; /* Aggiunto !important come ultima risorsa */
+}
+
+.navbar-toggler-danger:focus {
+    box-shadow: 0 0 0 0.25rem rgba(220, 53, 69, 0.25); /* Un'ombra rossa più leggera */
+}

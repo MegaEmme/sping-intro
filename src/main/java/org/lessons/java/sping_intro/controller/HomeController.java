@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 //Definisco qui che questo è un controller:
 @Controller
@@ -28,13 +29,15 @@ public class HomeController {
     // nel browser "http://localhost:8080"
 
     @GetMapping("/welcome")
-    public String welcome(@RequestParam(name = "name") String name, Model model) {
-        model.addAttribute("email", "gina@gmail.com");
+    public String welcome(@RequestParam(name = "name") String name, @RequestParam(name = "email") String email,
+            Model model) {
+        model.addAttribute("email", email);
         model.addAttribute("currentDate", LocalDateTime.now());
         model.addAttribute("name", name);
         return "greetings";
     }
-    // nel browser "http://localhost:8080/welcome?name=Gina"
+    // nel browser
+    // "http://localhost:8080/welcome?name=farncesco&email=er_pupone76@gmail.com"
 
     @GetMapping("/blog")
     public String blog(@RequestParam(name = "article") String article,
@@ -65,5 +68,23 @@ public class HomeController {
     }
     // nel browser:
     // http://localhost:8080/students
+
+    // CHE SUCCEDE? ROTTA PARAMETRICA
+    // content è quello che viene preso dopo pagina ("pagina/{content} - ln.78),
+    // prende il content associato alla Path (@PathVariable("content") - ln.79) che
+    // lo casta in una stringa (String urlContent), urlContent viene richiamato nel
+    // nostro metodo come variabile locale (ln.80) e la pagina "pageById" lo
+    // recupera (pageById - ln.15 - <h1 th:text="${contenuto}"></h1>)
+    @GetMapping("pagina/{content}")
+    public String pageById(Model model, @PathVariable("content") String urlContent) {
+        model.addAttribute("contenuto", urlContent);
+        return "pageById";
+        // in questo caso utilizziamo questo metodo cosi ma potremmo anche:
+        // - cercare il post con questo titolo (titolo=contenuto)
+        // - cercarlo studente con questo id (id = contenuto)
+        // - prend l'elemento indice in questo array (indice = contenuto)
+    }
+    // nel browser
+    // http://127.0.0.1:8080/pagina/quellochetipare
 
 }
